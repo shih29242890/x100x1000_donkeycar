@@ -30,6 +30,8 @@ IMAGE_W = 160
 IMAGE_H = 120
 IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 CAMERA_FRAMERATE = DRIVE_LOOP_HZ
+VFLIP = True
+HFLIP = True
 # For CSIC camera - If the camera is mounted in a rotated position, changing the below parameter will correct the output frame orientation
 CSIC_CAM_GSTREAMER_FLIP_PARM = 0 # (0 => none , 4 => Flip horizontally, 6 => Flip vertically)
 
@@ -42,7 +44,7 @@ PCA9685_I2C_BUSNUM = None   #None will auto detect, which is fine on the pi. But
 #DC_STEER_THROTTLE uses HBridge pwm to control one steering dc motor, and one drive wheel motor
 #DC_TWO_WHEEL uses HBridge pwm to control two drive motors, one on the left, and one on the right.
 #SERVO_HBRIDGE_PWM use ServoBlaster to output pwm control from the PiZero directly to control steering, and HBridge for a drive motor.
-DRIVE_TRAIN_TYPE = "SERVO_ESC" # SERVO_ESC|DC_STEER_THROTTLE|DC_TWO_WHEEL|SERVO_HBRIDGE_PWM
+DRIVE_TRAIN_TYPE = "DC_TWO_WHEEL" # SERVO_ESC|DC_STEER_THROTTLE|DC_TWO_WHEEL|SERVO_HBRIDGE_PWM
 
 #STEERING
 STEERING_CHANNEL = 1            #channel on the 9685 pwm board 0-15
@@ -74,7 +76,7 @@ HBRIDGE_PIN_RIGHT_BWD = 13
 #The DEFAULT_MODEL_TYPE will choose which model will be created at training time. This chooses
 #between different neural network designs. You can override this setting by passing the command
 #line parameter --type to the python manage.py train and drive commands.
-DEFAULT_MODEL_TYPE = 'linear'   #(linear|categorical|rnn|imu|behavior|3d|localizer|latent)
+DEFAULT_MODEL_TYPE = 'rnn'   #(linear|categorical|rnn|imu|behavior|3d|localizer|latent)
 BATCH_SIZE = 128                #how many records to use when doing one pass of gradient decent. Use a smaller number if your gpu is running out of memory.
 TRAIN_TEST_SPLIT = 0.8          #what percent of records to use for training. the remaining used for validation.
 MAX_EPOCHS = 100                #how many times to visit all records of your data
