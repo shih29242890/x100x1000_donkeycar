@@ -97,7 +97,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
             inputs = ['angle', 'throttle']
         elif cfg.CAMERA_TYPE == "PICAM":
             from donkeycar.parts.camera import PiCamera
-            cam = PiCamera(image_w=cfg.IMAGE_W, image_h=cfg.IMAGE_H, image_d=cfg.IMAGE_DEPTH)
+            cam = PiCamera(image_w=cfg.IMAGE_W, image_h=cfg.IMAGE_H, image_d=cfg.IMAGE_DEPTH, framerate=cfg.CAMERA_FRAMERATE, vflip=cfg.VFLIP, hflip=cfg.HFLIP)
         elif cfg.CAMERA_TYPE == "WEBCAM":
             from donkeycar.parts.camera import Webcam
             cam = Webcam(image_w=cfg.IMAGE_W, image_h=cfg.IMAGE_H, image_d=cfg.IMAGE_DEPTH)
@@ -471,10 +471,10 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
     
 
     elif cfg.DRIVE_TRAIN_TYPE == "DC_TWO_WHEEL":
-        from donkeycar.parts.actuator import TwoWheelSteeringThrottle, Mini_HBridge_DC_Motor_PWM
+        from donkeycar.parts.actuator import TwoWheelSteeringThrottle, Adafruit_DCMotor_Hat #Mini_HBridge_DC_Motor_PWM
 
-        left_motor = Mini_HBridge_DC_Motor_PWM(cfg.HBRIDGE_PIN_LEFT_FWD, cfg.HBRIDGE_PIN_LEFT_BWD)
-        right_motor = Mini_HBridge_DC_Motor_PWM(cfg.HBRIDGE_PIN_RIGHT_FWD, cfg.HBRIDGE_PIN_RIGHT_BWD)
+        left_motor = Adafruit_DCMotor_Hat(1) #Mini_HBridge_DC_Motor_PWM(cfg.HBRIDGE_PIN_LEFT_FWD, cfg.HBRIDGE_PIN_LEFT_BWD)
+        right_motor = Adafruit_DCMotor_Hat(2) #Mini_HBridge_DC_Motor_PWM(cfg.HBRIDGE_PIN_RIGHT_FWD, cfg.HBRIDGE_PIN_RIGHT_BWD)
         two_wheel_control = TwoWheelSteeringThrottle()
 
         V.add(two_wheel_control, 
