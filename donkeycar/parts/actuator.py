@@ -252,7 +252,7 @@ class Adafruit_DCMotor_Hat:
         self.motor = self.mh.getMotor(motor_num)
         self.motor_num = motor_num
         
-        atexit.register(self.turn_off_motors)
+#        atexit.register(self.turn_off_motors)
         self.speed = 0
         self.throttle = 0
     
